@@ -5,19 +5,20 @@ import { AuthGuardService } from 'src/services/authguard.service';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'home',
+    redirectTo: 'login',
     pathMatch: 'full'
   },
   {
-    path: 'home',
-    loadChildren: () => import('./home/home.module').then(m => m.HomePageModule)
+    path: 'login',
+    loadChildren: () => import('./login/login.module').then(m => m.LoginPageModule)
   },
+  { path: 'grupos-cadastro', loadChildren: './grupos-cadastro/grupos-cadastro.module#GruposCadastroPageModule',},
+  { path: 'grupos-detalhes', loadChildren: './grupos-detalhes/grupos-detalhes.module#GruposDetalhesPageModule', },
+  { path: 'grupos-lista', loadChildren: './grupos-lista/grupos-lista.module#GruposListaPageModule', },
+  { path: 'login', loadChildren: './login/login.module#LoginPageModule' },
+  { path: 'cadastro-usuario', loadChildren: './cadastro-usuario/cadastro-usuario.module#CadastroUsuarioPageModule', },
+  { path: 'logoff', loadChildren: './logoff/logoff.module#LogoffPageModule',  },
 
-  { path: 'funcionarios-cadastro', loadChildren: './funcionarios-cadastro/funcionarios-cadastro.module#FuncionariosCadastroPageModule' },
-  { path: 'funcionarios-detalhes', loadChildren: './funcionarios-detalhes/funcionarios-detalhes.module#FuncionariosDetalhesPageModule' },
-  { path: 'chamados-cadastro', loadChildren: './chamados-cadastro/chamados-cadastro.module#ChamadosCadastroPageModule' },
-  { path: 'chamados-detalhes', loadChildren: './chamados-detalhes/chamados-detalhes.module#ChamadosDetalhesPageModule' },
-  { path: 'chamados', loadChildren: './chamados/chamados.module#ChamadosPageModule' }
 
 
 ];

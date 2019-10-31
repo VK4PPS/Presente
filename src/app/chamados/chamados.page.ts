@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
-import { Chamados } from 'src/model/chamados';
+
 import { Router } from '@angular/router';
 import { StorageService } from 'src/services/storage.service';
+import { Chamados } from 'src/model/chamados';
 
 @Component({
   selector: 'app-chamados',

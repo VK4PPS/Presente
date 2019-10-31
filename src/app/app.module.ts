@@ -15,6 +15,8 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { firebaseConfig } from 'src/environments/firebase.config';
 import { StorageService } from 'src/services/storage.service';
 import { AuthGuardService } from 'src/services/authguard.service';
+import { ReactiveFormsModule } from '@angular/forms';
+import { IonicStorageModule } from '@ionic/storage';
 
 @NgModule({
   declarations: [AppComponent],
@@ -26,13 +28,19 @@ import { AuthGuardService } from 'src/services/authguard.service';
     AngularFireModule.initializeApp(firebaseConfig), // Inicia Firebase com nossas conf
     AngularFirestoreModule, // Banco de dados 
     AngularFireAuthModule,  // Autenticação
-    AngularFireStorageModule // Armazenamento Arquivos
+    AngularFireStorageModule, // Armazenamento Arquivos
+    ReactiveFormsModule,
+    IonicStorageModule.forRoot({
+      name: '__mydb',
+driverOrder: ['indexeddb', 'sqlite', 'websql']
+    })
   ],
   providers: [
     StatusBar,
     SplashScreen,
+    AuthGuardService,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    StorageService
+    StorageService,
   ],
   bootstrap: [AppComponent]
 })

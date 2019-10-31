@@ -12,28 +12,26 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 export class AppComponent {
   public appPages = [
     {
-      title: 'Funcionarios',
-      url: '/home',
+      title: 'Seus Grupos',
+      url: '/grupos-lista',
       icon: 'person'
     },
     {
-      title: 'Cadastro de Funcionarios',
-      url: '/funcionarios-cadastro',
-      icon: 'person-add'
+      title: 'Criar Grupos',
+      url: '/grupos-cadastro',
+      icon: 'people'
     },
     {
-      title: 'Chamados',
-      url: '/chamados',
-      icon: 'calendar'
-    },
-    {
-      title: 'Cadastro de Chamados',
-      url: '/chamados-cadastro',
-      icon: 'calendar' 
+      title: 'Deslogar',
+      url: '/logoff',
+      icon: 'exit'
     }
+
 
     
   ];
+
+  
 
   constructor(
     private platform: Platform,
