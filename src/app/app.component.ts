@@ -31,10 +31,12 @@ export class AppComponent {
       url: '/logoff',
       icon: 'exit'
     },
-    
+    {
+      title: 'Contato',
+      url: '/contato',
+      icon: 'person'
+    },
   ];
-
-  
 
   constructor(
     private platform: Platform,

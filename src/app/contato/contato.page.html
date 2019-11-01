@@ -1,0 +1,37 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button></ion-back-button>
+        </ion-buttons>
+        <ion-title>Contato</ion-title>
+      </ion-toolbar>
+</ion-header>
+<ion-content>
+    <ion-list>
+        <ion-item>
+          <ion-label fixed >E-mail</ion-label>
+          <ion-input type="email" placeholder="Seu Email" [(ngModel)]="email" ></ion-input>
+        </ion-item>
+    </ion-list>
+    <ion-list>
+        <ion-item>
+          <ion-label fixed >Nome</ion-label>
+          <ion-input type="nome" placeholder="Seu Nome" [(ngModel)]="nome" ></ion-input>
+        </ion-item>
+    </ion-list>
+    <ion-list>
+        <ion-item>
+          <ion-label fixed >Assunto</ion-label>
+          <ion-input type="assunto" placeholder="Qual o Assunto?" [(ngModel)]="assunto" ></ion-input>
+        </ion-item>
+    </ion-list>
+    <ion-list>
+        <ion-item>
+          <ion-label fixed >Menssagem</ion-label>
+          <textarea type="menssagem" placeholder="Sua Menssagem" [(ngModel)]="menssagem" rows="5" cols="134"></textarea>
+        </ion-item>
+    </ion-list>
+  
+  <ion-button expand="full" (click)="enviar()">Enviar</ion-button>
+
+</ion-content>

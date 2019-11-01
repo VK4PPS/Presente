@@ -17,7 +17,8 @@ const routes: Routes = [
   { path: 'grupos-lista', loadChildren: './grupos-lista/grupos-lista.module#GruposListaPageModule', },
   { path: 'login', loadChildren: './login/login.module#LoginPageModule' },
   { path: 'cadastro-usuario', loadChildren: './cadastro-usuario/cadastro-usuario.module#CadastroUsuarioPageModule', },
-  { path: 'logoff', loadChildren: './logoff/logoff.module#LogoffPageModule',  },
+  { path: 'logoff', loadChildren: './logoff/logoff.module#LogoffPageModule',  },  { path: 'contato', loadChildren: './contato/contato.module#ContatoPageModule' },
+
 
 
 
