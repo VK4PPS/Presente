@@ -12,6 +12,11 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 export class AppComponent {
   public appPages = [
     {
+      title: 'Perfil',
+      url: '/perfil',
+      icon: 'person'
+    },
+    {
       title: 'Seus Grupos',
       url: '/grupos-lista',
       icon: 'person'
@@ -25,13 +30,13 @@ export class AppComponent {
       title: 'Deslogar',
       url: '/logoff',
       icon: 'exit'
-    }
-
-
-    
+    },
+    {
+      title: 'Contato',
+      url: '/contato',
+      icon: 'person'
+    },
   ];
-
-  
 
   constructor(
     private platform: Platform,
