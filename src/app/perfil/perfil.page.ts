@@ -1,10 +1,11 @@
-import { Perfil } from 'src/model/perfil';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { LoadingController } from '@ionic/angular';
+import { Router } from '@angular/router';
+import { Perfil } from 'src/model/perfil';
 
 @Component({
   selector: 'app-perfil',
@@ -12,31 +13,35 @@ import { LoadingController } from '@ionic/angular';
   styleUrls: ['./perfil.page.scss'],
 })
 export class PerfilPage implements OnInit {
+
   formGroup : FormGroup;
   idUser : string;
   perfil : Perfil = new Perfil();
   imagem : any;
+  myphoto:any="assets/imgs/1.jpg";
 
   constructor(private formBuild : FormBuilder,
     private auth : AngularFireAuth,
     private db : AngularFirestore,
     public firestorage : AngularFireStorage,
-    private loadingController : LoadingController) {
+    private loadingController : LoadingController,
+    private router : Router) {
 
       this.formGroup = this.formBuild.group({
         nome: ['',Validators.required],
-        email: ['',Validators.required],
-        uid: localStorage.getItem('uid')
+        sobrenome: ['',Validators.required],
+        telefone: ['',Validators.required],
+        email: ['',Validators.required]
       });
 
       this.auth.user.subscribe(resp =>{
         this.idUser = resp.uid;
         this.loadPerfil();
+        this.downloadImage();
       });
      }
 
   ngOnInit() {
-
   }
 
   loadPerfil(){
@@ -44,6 +49,7 @@ export class PerfilPage implements OnInit {
       if(response.exists==false){
         this.nPerfil();
       }else{
+        this.perfil.setPerfil(response.data());
       }
     })
   }
@@ -51,6 +57,8 @@ export class PerfilPage implements OnInit {
   nPerfil(){
     let json = {
       nome: "",
+      sobrenome: "",
+      telefone: "",
       email: ""
     }
     this.db.collection('perfil').doc(this.idUser).set(json).then(() =>{})
@@ -58,6 +66,7 @@ export class PerfilPage implements OnInit {
 
   atualizar(){
     this.db.collection('perfil').doc(this.idUser).set(this.formGroup.value).then(() =>{console.log('Atualizado com sucesso')
+    this.router.navigate(['/grupos-cadastro']);
   }).catch(()=>{
     console.log('Erro ao atualizar');
   })
@@ -88,6 +97,10 @@ downloadImage(){
   ref.getDownloadURL().then(url =>{
     this.imagem = url;
   });
-
 }
+
+
+
+
+
 }

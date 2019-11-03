@@ -1,43 +1,22 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>cadastroUsuario</ion-title>
+    <ion-title>Nova Conta</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
 
-    <img src="{{imagem}}" width="100%"/>
-    <ion-item>
-      <input type="file" (change)="enviarArquivo($event)"/>
-    </ion-item>
-
-<ion-list>
-<ion-item>
-  <ion-label fixed>E-mail</ion-label>
-  <ion-input type="text" value="" [(ngModel)]="email"></ion-input>
-</ion-item>
-<ion-item>
-    <ion-label fixed>Senha</ion-label>
-    <ion-input type="password" value="" [(ngModel)]="senha"></ion-input>
-  </ion-item>
-</ion-list>
-
-
-
-<form [formGroup]="formGroup">
   <ion-list>
     <ion-item>
-      <ion-label floating>Nome</ion-label>
-      <ion-input formControlName="nome" value="{{perfil.nome}}" type="text">
-        </ion-input>
+      <ion-label fixed>E-mail</ion-label>
+      <ion-input type="text" value="" [(ngModel)]="email"></ion-input>
     </ion-item>
-
-    <ion-item style="display: none;">
-        <ion-input formControlName="email" type="text" ng-model="email" value="{{email}}"></ion-input>
+    <ion-item>
+        <ion-label fixed>Senha</ion-label>
+        <ion-input type="password" [(ngModel)]="senha"></ion-input>
       </ion-item>
-</ion-list >
-</form>
+  </ion-list>
+  <ion-button color="tertiary" expand="full" (click)="cadastrar()">Cadastrar</ion-button>
+  <ion-button color="tertiary" expand="full" (click)="logar()">Fazer Login</ion-button>
 
-
-<ion-button expand="full" (click)="cadastrar()">Cadastrar</ion-button> 
 </ion-content>
