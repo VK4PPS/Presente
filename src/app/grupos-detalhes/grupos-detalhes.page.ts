@@ -139,7 +139,7 @@ export class GruposDetalhesPage implements OnInit {
       response.forEach(doc=>{ 
       
         let b = new Perfil(); // Cria um novo objeto grupos
-        b.setPerfil(doc.payload.doc.data(),doc.payload.doc.id); // coloca os dados do doc em grupos
+        b.setPerfil(doc.payload.doc.data()); // coloca os dados do doc em grupos
 
         this.listaPerfil.push(b); // adiciona este grupos a lista
       },err=>{ // Em caso de erro, executa esssa linha
