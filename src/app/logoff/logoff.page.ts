@@ -1,6 +1,6 @@
-import { Router } from '@angular/router';
-import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-logoff',
@@ -10,16 +10,15 @@ import { AngularFireAuth } from '@angular/fire/auth';
 export class LogoffPage implements OnInit {
 
   constructor(public afAuth: AngularFireAuth,
-    private router : Router) { }
+    private router: Router) { }
 
   ngOnInit() {
-   this.afAuth.auth.signOut().then(()=>{
-     localStorage.removeItem("uid");
-     this.router.navigate(['/login']);
-   }).catch(()=>{
-     this.router.navigate(['/login']);
-   })
+    this.afAuth.auth.signOut().then(()=>{
+      localStorage.removeItem("uid");
+      this.router.navigate(['/login']);
+    }).catch(()=>{
+      this.router.navigate(['/home']);
+    })
   }
 
 }
-

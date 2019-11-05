@@ -1,35 +1,47 @@
-<ion-header class="bar bar-header bar-calm">
+<ion-header>
   <ion-toolbar>
-      <ion-buttons slot="start">
-          <ion-back-button></ion-back-button>
-      </ion-buttons>
-      <ion-title>Cliente Cadastro</ion-title>
+           <ion-title>Olá {{perfil.nome}} {{perfil.sobrenome}}</ion-title>
     </ion-toolbar>
 </ion-header>
 
 <ion-content>
+    <div class="user-photo image-upload" padding-top>
+        <label for="file-input" >
+            <ion-avatar ><img src="{{imagem}}"/> </ion-avatar>
+      
+        </label>
+        <ion-label text-center><p>Selecione uma foto</p></ion-label>
+        <input id="file-input" type="file" (change)="enviaArquivo($event)" />
+    </div>
 
-<img src="{{imagem}}" width="100%"/>
-
-  <ion-item>
-    <input type="file" (change)="enviarArquivo($event)"/>
-  </ion-item>
-
-<form [formGroup]="formGroup" padding>
+<form [formGroup]="formGroup">
   <ion-list>
-    <ion-item>
-      <ion-label floating>Nome</ion-label>
-      <ion-input formControlName="nome" value="{{perfil.nome}}" type="text">
+      <ion-item>
+          <ion-icon name="person" slot="start"></ion-icon>
+          <ion-label>
+              <p>Nome</p>
+            </ion-label>
+        <ion-input formControlName="nome" value="{{perfil.nome}}" type="text">
+          </ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-icon name="" slot="start"></ion-icon>
+        <ion-label>
+            <p>Sobrenome</p>
+          </ion-label>
+      <ion-input formControlName="sobrenome" value="{{perfil.sobrenome}}" type="text">
         </ion-input>
     </ion-item>
     <ion-item>
-      <ion-label floating>Email</ion-label>
-      <ion-input formControlName="email" value="{{perfil.email}}" type="text">
-        </ion-input>
-    </ion-item>
-</ion-list >
-
-<ion-button expand="full" (click)="atualizar()">Atualizar</ion-button>
+      <ion-icon name="call" slot="start"></ion-icon>
+      <ion-label>
+          <p>Telefone</p>
+        </ion-label>
+    <ion-input formControlName="telefone" value="{{perfil.telefone}}" type="text">
+      </ion-input>
+  </ion-item>
+</ion-list>
+<ion-button color="tertiary" expand="full" (click)="atualizar()">Atualizar dados</ion-button>
 
 </form>
 </ion-content>

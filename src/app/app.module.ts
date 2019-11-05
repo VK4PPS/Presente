@@ -1,3 +1,5 @@
+import { AuthGuardService } from './services/auth-guard.service';
+import { firebaseConfig } from './../environments/firebase.config';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
@@ -12,11 +14,8 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireAuthModule } from '@angular/fire/auth';
-import { firebaseConfig } from 'src/environments/firebase.config';
-import { StorageService } from 'src/services/storage.service';
-import { AuthGuardService } from 'src/services/authguard.service';
-import { ReactiveFormsModule } from '@angular/forms';
-import { IonicStorageModule } from '@ionic/storage';
+import { CommonModule } from '@angular/common';
+
 
 @NgModule({
   declarations: [AppComponent],
@@ -25,22 +24,17 @@ import { IonicStorageModule } from '@ionic/storage';
     BrowserModule,
     IonicModule.forRoot(),
     AppRoutingModule,
-    AngularFireModule.initializeApp(firebaseConfig), // Inicia Firebase com nossas conf
-    AngularFirestoreModule, // Banco de dados 
-    AngularFireAuthModule,  // Autenticação
-    AngularFireStorageModule, // Armazenamento Arquivos
-    ReactiveFormsModule,
-    IonicStorageModule.forRoot({
-      name: '__mydb',
-driverOrder: ['indexeddb', 'sqlite', 'websql']
-    })
+    AngularFireModule.initializeApp(firebaseConfig), 
+    AngularFirestoreModule,
+    AngularFireAuthModule,  
+    AngularFireStorageModule,
+  
   ],
   providers: [
     StatusBar,
     SplashScreen,
-    AuthGuardService,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    StorageService,
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, AuthGuardService,
+    CommonModule
   ],
   bootstrap: [AppComponent]
 })
