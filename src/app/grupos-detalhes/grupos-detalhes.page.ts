@@ -103,8 +103,8 @@ export class GruposDetalhesPage implements OnInit {
       .doc(this.grupos.id) // Seleciona pelo ID do grupos
         .set(this.formGroup.value) // Envia o formGroup com os dados selecionados
           .then(() =>{
-            this.presentToast(); // Dados atualizados
-            this.router.navigate(['grupos-lista']); // redireciona para grupos
+            this.presentToast();
+             // redireciona para grupos
           }).catch(()=>{
             console.log('Erro ao Atualizar'); // Erro ao atualizar
           })
@@ -239,12 +239,14 @@ export class GruposDetalhesPage implements OnInit {
           role: 'cancel',
           cssClass: 'secondary',
           handler: (blah) => {
-            
+            //
           }
         }, {
           text: 'Sim',
           handler: () => {
             this.excluir();
+            this.presentToast(); // Dados atualizados
+            this.router.navigate(['grupos-lista']);
           }
         }
       ]

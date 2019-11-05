@@ -1,7 +1,7 @@
 <ion-header>
     <ion-toolbar>
         <ion-buttons slot="start">
-            <ion-menu-button></ion-menu-button>
+            <ion-back-button></ion-back-button>
         </ion-buttons>
         <ion-title>Grupo {{this.grupos.nome}}</ion-title>
       </ion-toolbar>
@@ -12,35 +12,28 @@
   <form [formGroup]="formGroup">
     <ion-list>
       <ion-item>
-        <ion-icon name="person" slot="start"></ion-icon>
-        <ion-label>
-            <p>Nome</p>
-          </ion-label>
-      <ion-input formControlName="nome" value="{{grupos.nome}}" type="text">
-        </ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-icon name="time" slot="start"></ion-icon>
-      <ion-label>
-          <p>Horas</p>
-        </ion-label>
-    <ion-input formControlName="horas" value="{{grupos.horas}}" type="number">
-      </ion-input>
-  </ion-item>
-  <ion-item>
-    <ion-icon name="clock" slot="start"></ion-icon>
-    <ion-label>
-        <p>Horas Por Aula</p>
-      </ion-label>
-      <ion-input formControlName="horasPorAula" formGroupName="horasPorAula" value="{{grupos.horasPorAula}}" type="number">
-      </ion-input>
-  </ion-item>
+        <ion-label floating>Nome</ion-label>
+        <ion-input formControlName="nome" value="{{grupos.nome}}" type="text">
+          </ion-input>
+      </ion-item>
+      <ion-item>
+          <ion-label floating>Horas</ion-label>
+          <ion-input formControlName="horas"  value="{{grupos.horas}}" type="number">
+             </ion-input>
+      </ion-item>
+      <ion-item>
+          <ion-label floating>Horas Por Aula</ion-label>
+          <ion-input formControlName="horasPorAula" formGroupName="horasPorAula" value="{{grupos.horasPorAula}}" type="number">
+            </ion-input>
+      </ion-item>
   </ion-list>
   <ion-row>
-    <ion-col size-md align-self-start>
-          <ion-button  color="tertiary" expand="full" (click)="atualizar()">Atualizar</ion-button>
+      <ion-col size="6">
+          <ion-button expand="full" (click)="atualizar()">Atualizar</ion-button>
       </ion-col>
-      <ion-col size-md>
+      <ion-col size="6">
+      </ion-col>
+      <ion-col size="4">
           <ion-button color="danger" expand="full" (click)="confirm()">Excluir</ion-button>
       </ion-col>
     </ion-row>
@@ -74,47 +67,25 @@
 <ion-row >
 
   <ion-col size-md align-self-start>
-      <ion-item>
-          <ion-icon name="person" slot="start"></ion-icon>
-          <ion-label>
-              <p>Nome</p>
-            </ion-label>
-      </ion-item>
-    <div class="ion-input">{{item.nome}}</div>
+      Nome: {{item.nome}}
   </ion-col>
 
   <ion-col size-md align-self-start>
-      <ion-item>
-          <ion-icon name="mail" slot="start"></ion-icon>
-          <ion-label>
-              <p>Email</p>
-            </ion-label>
-      </ion-item>
-    <div class="ion-input">{{item.email}}</div>
+      Email: {{item.email}}
   </ion-col>
 
 </ion-row>
 
 <ion-row>
   <ion-col size-md>
-      <ion-item>
-          <ion-icon name="time" slot="start"></ion-icon>
-          <ion-label>
-              <p>Horas Presente</p>
-            </ion-label>
-      </ion-item>
-    <div class="ion-input">{{(item.horas/60).toFixed(1)}}</div>
+      Horas Presente: {{(item.horas/60).toFixed(1)}}
   </ion-col>
 
   <ion-col size-md>
-      <ion-item>
-          <ion-icon name="time" slot="start"></ion-icon>
-          <ion-label>
-              <p>Horas Presente</p>
-            </ion-label>
-      </ion-item>
-    <div class="ion-input"> {{(((item.horas/60)-this.minutosSoma) / this.grupos.horas*100).toFixed(1)}}%</div>
-  </ion-col>  
+      Porcentagem Frequência: {{(((item.horas/60)-this.minutosSoma) / this.grupos.horas*100).toFixed(1)}}%
+  </ion-col>
+
+  
 
 </ion-row>
 

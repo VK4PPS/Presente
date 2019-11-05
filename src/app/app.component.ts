@@ -17,12 +17,12 @@ export class AppComponent {
     {
       title: 'Seus Grupos',
       url: '/grupos-lista',
-      icon: 'person'
+      icon: 'contacts'
     },
     {
       title: 'Criar Grupos',
       url: '/grupos-cadastro',
-      icon: 'people'
+      icon: 'contacts'
     },
     {
       title: 'Seu Perfil',
@@ -32,12 +32,12 @@ export class AppComponent {
     {
       title: 'Contato',
       url: '/contato',
-      icon: 'person'
+      icon: 'chatboxes'
     },
     {
       title: 'Sobre Nós',
       url: '/aboutus',
-      icon: 'person',
+      icon: 'list',
     },
     {
       title: 'Deslogar',
