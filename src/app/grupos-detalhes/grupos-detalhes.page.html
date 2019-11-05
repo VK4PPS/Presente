@@ -3,11 +3,12 @@
         <ion-buttons slot="start">
             <ion-back-button></ion-back-button>
         </ion-buttons>
-        <ion-title>Grupos Cadastro</ion-title>
+        <ion-title>Grupo {{this.grupos.nome}}</ion-title>
       </ion-toolbar>
 </ion-header>
 <ion-content>
     
+  <!-- Atualizar / Excluir Grupo -->
   <form [formGroup]="formGroup">
     <ion-list>
       <ion-item>
@@ -26,7 +27,7 @@
             </ion-input>
       </ion-item>
   </ion-list>
-  <ion-row padding>
+  <ion-row>
       <ion-col size="6">
           <ion-button expand="full" (click)="atualizar()">Atualizar</ion-button>
       </ion-col>
@@ -37,10 +38,13 @@
       </ion-col>
     </ion-row>
   </form>
+  <!-- Atualizar / Excluir Grupo -->
 
+
+<!-- Busca Perfis -->
   <ion-searchbar showCancelButton="focus" [(ngModel)]="busca" (ionChange)="buscar($event)" placeholder="Buscar Pessoas"></ion-searchbar>
-
-<ion-list>
+<!-- Resultado Busca -->
+<ion-list>          <!-- Resultado Busca -->
   <ion-item *ngFor="let item of listaPerfil" >
     <ion-label>{{item.nome}}</ion-label>
     <ion-label>{{item.email}}</ion-label>
@@ -50,53 +54,65 @@
     this.email = item.email)"></ion-icon>
   </ion-item>
 </ion-list>
+<!-- Busca Perfis -->
 
-<ion-toolbar color="primary">
+
+<!-- Lista Grid Pessoas no Grupo -->
+<ion-toolbar color="primary">           <!-- "Pessoas no Grupo" -->
     <ion-title>Pessoas no Grupo</ion-title>
   </ion-toolbar>
 
-<ion-list>
-    <ion-item *ngFor="let item of listaPessoaGrupo" >
-       <ion-label>{{item.nome}}</ion-label>
-       <ion-item></ion-item>
-      <ion-label>{{item.email}}</ion-label>
-      <ion-item></ion-item>
-      <ion-label> {{item.horas}}</ion-label>
-      <ion-item></ion-item>
-      <ion-input  type="number">{{(item.horas-this.minutosSoma) / this.grupos.horas*100}}%</ion-input>
+<ion-grid *ngFor="let item of listaPessoaGrupo">
 
-        <ion-button (click)="presente(
-          this.idDocumento = item.id,
-          this.idPessoa = item.idPessoa,
-          this.nome = item.nome,
-          this.email = item.email,
-          this.horas = item.horas)" color="primary">add 1 Presença</ion-button>
+<ion-row >
+
+  <ion-col size-md align-self-start>
+      Nome: {{item.nome}}
+  </ion-col>
+
+  <ion-col size-md align-self-start>
+      Email: {{item.email}}
+  </ion-col>
+
+</ion-row>
+
+<ion-row>
+  <ion-col size-md>
+      Horas Presente: {{(item.horas/60).toFixed(1)}}
+  </ion-col>
+
+  <ion-col size-md>
+      Porcentagem Frequência: {{(((item.horas/60)-this.minutosSoma) / this.grupos.horas*100).toFixed(1)}}%
+  </ion-col>
+
+  
+
+</ion-row>
 
 
-          <ion-button (click)="falta(
-          this.idDocumento = item.id,
-          this.idPessoa = item.idPessoa,
-          this.nome = item.nome,
-          this.email = item.email,
-          this.horas = item.horas)" color="danger">add 1 Falta</ion-button>
+<ion-row>
+  <ion-col size-md>
+      <input type="text" [(ngModel)]="y" type="number">
+  </ion-col>
 
-        <ion-button (click)="atraso3(
-          this.idDocumento = item.id,
-          this.idPessoa = item.idPessoa,
-          this.nome = item.nome,
-          this.email = item.email,
-          this.horas = item.horas)" color="danger">add Atraso 30 min</ion-button>
+  <ion-col size-md>
+      <ion-select [(ngModel)]="select" placeholder="Horas" value="60" >
+          <ion-select-option value="60">Horas</ion-select-option>
+          <ion-select-option value="1">Minutos</ion-select-option>
+        </ion-select>
+  </ion-col>
 
-        <ion-button (click)="atraso1(
-          this.idDocumento = item.id,
-          this.idPessoa = item.idPessoa,
-          this.nome = item.nome,
-          this.email = item.email,
-          this.horas = item.horas)" color="danger">add Atraso 1 hora</ion-button>
 
-      <ion-icon name="close" slot="end" (click)="excluirPessoaGrupo( this.idDocumento = item.id )"></ion-icon>
-    </ion-item>
-  </ion-list>
-    
+  <ion-col size="1" size-md align-self-start>
+      <ion-icon name="add-circle" (click)="frequencia(this.x = this.y * this.select ,this.idDocumento = item.id, this.idPessoa = item.idPessoa, this.nome = item.nome, this.email = item.email, this.horas = item.horas)" color="primary"></ion-icon>
+      <ion-icon name="remove-circle" (click)="frequencia(this.x = - this.y * this.select ,this.idDocumento = item.id, this.idPessoa = item.idPessoa, this.nome = item.nome, this.email = item.email, this.horas = item.horas)" color="primary"></ion-icon>
+      <ion-icon name="trash" (click)="excluirPessoaGrupo( this.idDocumento = item.id )"></ion-icon>
+    </ion-col>
+   
+
+</ion-row>
+<ion-item-divider ></ion-item-divider>
+</ion-grid>
+<!-- Lista Pessoas no Grupo -->
 
 </ion-content>
