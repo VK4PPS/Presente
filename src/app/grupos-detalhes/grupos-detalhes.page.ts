@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AngularFirestore } from 'node_modules/@angular/fire/firestore';
+import { AngularFirestore } from '@angular/fire/firestore';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Grupos } from 'src/model/grupos';
 import { PessoaGrupo } from 'src/model/pessoaGrupo';
@@ -25,10 +25,6 @@ export class GruposDetalhesPage implements OnInit {
   listaPerfil : Perfil[] = [];
   listaPessoaGrupo : PessoaGrupo[] = [];
 
-
-  x: number;
-  y: number;
-  select: number;
 
   idDocumento: string;
   idPessoa: string;
@@ -71,6 +67,7 @@ export class GruposDetalhesPage implements OnInit {
   
 
   ngOnInit() {
+    console.log(localStorage.getItem('uid'))
     // Carregar os dados do grupos selecionado
     this.db.collection("grupos") // Seleciona a coleção grupos
     .doc(this.id).get().subscribe(response=>{ // .doc seleciona o grupos com base no id
@@ -81,8 +78,7 @@ export class GruposDetalhesPage implements OnInit {
       this.grupos.horas = response.data().horas;
       this.grupos.horasPorAula = response.data().horasPorAula;
        
-      this.select = 60;
-      this.x = 0;
+
 
       this.getPessoaGrupo()
   
@@ -131,9 +127,9 @@ export class GruposDetalhesPage implements OnInit {
   
 
   buscar(){
-
+    console.log(this.busca)
     this.db.collection('perfil' , ref => ref.where('email', '==', this.busca)).snapshotChanges().subscribe(response=>{ 
-
+      console.log(this.busca)
       this.listaPerfil = []; // limpando a lista
       // response retona um objeto do firebase, precisamos converter em
       // um objeto grupos
@@ -143,14 +139,14 @@ export class GruposDetalhesPage implements OnInit {
       response.forEach(doc=>{ 
       
         let b = new Perfil(); // Cria um novo objeto grupos
-        b.setPerfil(doc.payload.doc.data()); // coloca os dados do doc em grupos
+        b.setPerfil(doc.payload.doc.data(),doc.payload.doc.id); // coloca os dados do doc em grupos
 
         this.listaPerfil.push(b); // adiciona este grupos a lista
       },err=>{ // Em caso de erro, executa esssa linha
         console.log(err);
       })
   })
-
+  console.log(this.listaPerfil)
   }
 
   getPessoaGrupo(){
@@ -175,11 +171,11 @@ export class GruposDetalhesPage implements OnInit {
   }
 
 
-  frequencia() {
+  presente() {
     this.formGroup2 = this.formA.group({
       nome : this.nome,
-      email :  this.email,
-      horas: this.horas + this.x,
+      email : this.email,
+      horas: this.grupos.horasPorAula + this.horas,
       idGrupo : [this.grupos.id],
       idPessoa : this.idPessoa, 
     })
@@ -189,13 +185,55 @@ export class GruposDetalhesPage implements OnInit {
         .set(this.formGroup2.value) // Envia o formGroup com os dados selecionados
           .then(() =>{
             this.presentToast(); // Dados atualizados
+            this.router.navigate(['grupos']); // redireciona para grupos
           }).catch(()=>{
             console.log('Erro ao Atualizar'); // Erro ao atualizar
           })
  
   }
 
-  
+  falta() {
+    this.formGroup2 = this.formA.group({
+      nome : this.nome,
+      email : this.email,
+      horas: -this.grupos.horasPorAula + this.horas,
+      idGrupo : [this.grupos.id],
+      idPessoa : this.idPessoa, 
+    })
+    // Atualiza dos dados do grupos
+    this.db.collection('pessoaGrupo') // seleciona a coleção grupos
+      .doc(this.idDocumento) // Seleciona pelo ID do grupos
+        .set(this.formGroup2.value) // Envia o formGroup com os dados selecionados
+          .then(() =>{
+            this.presentToast(); // Dados atualizados
+            this.router.navigate(['grupos']); // redireciona para grupos
+          }).catch(()=>{
+            console.log('Erro ao Atualizar'); // Erro ao atualizar
+          })
+ 
+  }
+
+ atraso() {
+    this.formGroup2 = this.formA.group({
+      nome : this.nome,
+      email : this.email,
+      horas: this.horas - this.minutosSoma,
+      idGrupo : [this.grupos.id],
+      idPessoa : this.idPessoa, 
+    })
+    // Atualiza dos dados do grupos
+    this.db.collection('pessoaGrupo') // seleciona a coleção grupos
+      .doc(this.idDocumento) // Seleciona pelo ID do grupos
+        .set(this.formGroup2.value) // Envia o formGroup com os dados selecionados
+          .then(() =>{
+            this.presentToast(); // Dados atualizados
+            this.router.navigate(['grupos']); // redireciona para grupos
+          }).catch(()=>{
+            console.log('Erro ao Atualizar'); // Erro ao atualizar
+          })
+ 
+  }
+
 
   excluirPessoaGrupo(){
     this.db.collection('pessoaGrupo') // seleciona a coleção grupos
@@ -204,6 +242,16 @@ export class GruposDetalhesPage implements OnInit {
 
       this.router.navigate(['grupos-detalhes']); // redireciona para grupos
     })
+  }
+
+atraso1(){
+
+this.minutosSoma = this.minutosSoma+1;
+}
+
+atraso3(){
+
+  this.minutosSoma = this.minutosSoma+0.5;
   }
 
   cadastrar(){
@@ -220,6 +268,7 @@ export class GruposDetalhesPage implements OnInit {
     this.db.collection('pessoaGrupo') // Seleciono a coleção do firebase
     .add(this.formGroup2.value).then(() =>{ // .add realiza o cadastro, os dados do formGroup
       this.presentToast();// Dados cadastrados com sucesso
+      this.router.navigate(['grupos-lista']); // redireciona para grupos
     }).catch(()=>{ 
       console.log("Erro ao cadastrar!") // Erro
     });

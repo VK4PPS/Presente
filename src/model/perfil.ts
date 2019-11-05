@@ -1,15 +1,14 @@
 export class Perfil{
-    id: string;
-    nome: string;
-    email: string;
-    sobrenome: string;
-    telefone: string;
-    
-    setPerfil(obj: any){
+    id : string;
+    nome : string;
+    email : string;
+    uid : string;
+
+    setPerfil(obj : any, id : any){
+        this.id = id;
         this.nome = obj.nome;
-        this.id = obj.id;
-        this.sobrenome = obj.sobrenome;
-        this.telefone = obj.telefone;
         this.email = obj.email;
+        this.uid = obj.uid;
+
     }
 }

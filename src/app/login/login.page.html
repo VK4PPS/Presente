@@ -1,30 +1,49 @@
-<ion-header class="padding">
+
+<ion-header>
+  <ion-toolbar>
+    <ion-title>login</ion-title>
+  </ion-toolbar>
 </ion-header>
+
+<div class="fotinha">
+    <img src="assets/img/1.jpg" width="310PX" />
+    </div>
+    
+
 <ion-content padding>
-        <div class="user-photo" padding-top>
-          <ion-avatar><img src="assets/img/1.jpg">
-          </ion-avatar>
-        </div>
+  
   <ion-list>
-      <ion-item>
-          <ion-icon name="person" slot="start"></ion-icon>
-          <ion-label>
-              <p>Email</p>
-            </ion-label>
-        <ion-input type="text" value="" [(ngModel)]="email" >
-          </ion-input>
-      </ion-item>
-      <ion-item>
-          <ion-icon name="key" slot="start"></ion-icon>
-          <ion-label>
-              <p>Senha</p>
-            </ion-label>
-        <ion-input type="password" value="" [(ngModel)]="senha" >
-          </ion-input>
-      </ion-item>
+    <ion-item>
+      <ion-label fixed>E-mail</ion-label>
+      <ion-input type="text" value="" [(ngModel)]="email"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label fixed>Senha</ion-label>
+      <ion-input type="password" [(ngModel)]="senha"></ion-input>
+    </ion-item>
   </ion-list>
-  <ion-button color="tertiary" expand="full" (click)="login()">Entrar</ion-button>
-  <ion-button color="tertiary" expand="full" (click)="goNovoUsuario()">Cadastrar</ion-button>
-  <div class="passwordforget" (click)="goNovaSenha()"><p>Esqueci minha senha</p></div>
+
+  <ion-row>
+      <ion-col>
+          <ion-button expand="full" (click)="login()">Entrar</ion-button>
+      </ion-col>
+      <ion-col>
+          <ion-button expand="full" (click)="goNovoUsuario()">Cadastrar</ion-button>
+      </ion-col>
+    </ion-row>
+
+  
+  
+  <ion-row>
+      <ion-col>
+        <div></div>
+      </ion-col>
+      <ion-col>
+        <div><ion-button expand="full" (click)="goNovaSenha()" color="danger">ESqueceu a Senha</ion-button></div>
+      </ion-col>
+      <ion-col>
+        <div></div>
+      </ion-col>
+  </ion-row>    
 
 </ion-content>
