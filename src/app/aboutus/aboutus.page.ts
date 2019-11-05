@@ -15,8 +15,8 @@ export class AboutusPage implements OnInit {
   ngOnInit() {
   }
 
-  developer(idValue : string){
-    this.router.navigate(['developer',{id : idValue}]);
+  developer(){
+    this.router.navigate(['developer']);
   } 
 
 }

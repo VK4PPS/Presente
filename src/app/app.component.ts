@@ -17,7 +17,7 @@ export class AppComponent {
     {
       title: 'Seus Grupos',
       url: '/grupos-lista',
-      icon: 'person'
+      icon: 'people'
     },
     {
       title: 'Criar Grupos',
@@ -32,13 +32,19 @@ export class AppComponent {
     {
       title: 'Contato',
       url: '/contato',
-      icon: 'person'
+      icon: 'call'
     },
     {
       title: 'Sobre Nós',
       url: '/aboutus',
-      icon: 'person',
+      icon: 'bookmarks',
     },
+    {
+      title: 'Politica de Privacidade',
+      url: '/privacidade',
+      icon: 'ribbon',
+    },
+
     {
       title: 'Deslogar',
       url: '/logoff',

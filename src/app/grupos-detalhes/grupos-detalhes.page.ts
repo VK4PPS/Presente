@@ -103,8 +103,8 @@ export class GruposDetalhesPage implements OnInit {
       .doc(this.grupos.id) // Seleciona pelo ID do grupos
         .set(this.formGroup.value) // Envia o formGroup com os dados selecionados
           .then(() =>{
-            this.presentToast(); // Dados atualizados
-            this.router.navigate(['grupos-lista']); // redireciona para grupos
+            this.presentToast();
+             // redireciona para grupos
           }).catch(()=>{
             console.log('Erro ao Atualizar'); // Erro ao atualizar
           })
@@ -115,7 +115,6 @@ export class GruposDetalhesPage implements OnInit {
       .doc(this.grupos.id) // Seleciona pelo ID do grupos
         .delete().then(()=>{ // Executa a exclusão
           this.presentToast();
-          this.router.navigate(['grupos-lista']);
     })
     
   }
@@ -175,7 +174,7 @@ export class GruposDetalhesPage implements OnInit {
   }
 
 
-  frequencia() {
+  frequencia(x: number,y: number,select:string,idDocumento:string,idPessoa:string, nome:string, email:string, horas:string ) {
     this.formGroup2 = this.formA.group({
       nome : this.nome,
       email :  this.email,
@@ -206,7 +205,7 @@ export class GruposDetalhesPage implements OnInit {
     })
   }
 
-  cadastrar(){
+  cadastrar(idDocumento: string, nome: string, email: string){
 // (Nome : string, Id: string) Não entendi como isso funciona, descobrir mais tarde
     this.formGroup2 = this.formA.group({
       nome : this.nome,
@@ -239,12 +238,14 @@ export class GruposDetalhesPage implements OnInit {
           role: 'cancel',
           cssClass: 'secondary',
           handler: (blah) => {
-            
+            //
           }
         }, {
           text: 'Sim',
           handler: () => {
             this.excluir();
+            this.presentToast(); // Dados atualizados
+            this.router.navigate(['grupos-lista']);
           }
         }
       ]

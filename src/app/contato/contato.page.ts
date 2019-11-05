@@ -31,8 +31,8 @@ export class ContatoPage implements OnInit {
   enviar() {
     this.db.collection('contato')
       .add(this.formGroup.value).then(() => {
+        this.router.navigate(['/privacidade']);
         this.presentToast();
-        this.router.navigate(['/contato']);
       }).catch(() => {
         console.log('Erro ao enviar!');
       });
