@@ -35,6 +35,11 @@ export class AppComponent {
       icon: 'person'
     },
     {
+      title: 'Sobre Nós',
+      url: '/aboutus',
+      icon: 'person',
+    },
+    {
       title: 'Deslogar',
       url: '/logoff',
       icon: 'exit'

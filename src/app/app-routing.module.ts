@@ -20,7 +20,10 @@ const routes: Routes = [
   { path: 'logoff', loadChildren: './logoff/logoff.module#LogoffPageModule',  },
   { path: 'contato', loadChildren: './contato/contato.module#ContatoPageModule' },
   { path: 'perfil', loadChildren: './perfil/perfil.module#PerfilPageModule', canActivate : [AuthGuardService]},
-  { path: 'recuperar-senha', loadChildren: './recuperar-senha/recuperar-senha.module#RecuperarSenhaPageModule' }
+  { path: 'recuperar-senha', loadChildren: './recuperar-senha/recuperar-senha.module#RecuperarSenhaPageModule' },  { path: 'developer', loadChildren: './developer/developer.module#DeveloperPageModule' },
+  { path: 'developer-detalhes', loadChildren: './developer-detalhes/developer-detalhes.module#DeveloperDetalhesPageModule' },
+  { path: 'aboutus', loadChildren: './aboutus/aboutus.module#AboutusPageModule' }
+
 
 
 
