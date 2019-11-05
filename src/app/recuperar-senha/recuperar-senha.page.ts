@@ -1,8 +1,7 @@
-import { ToastController } from '@ionic/angular';
-import { Router } from '@angular/router';
-import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { async } from 'q';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-recuperar-senha',
@@ -10,41 +9,36 @@ import { async } from 'q';
   styleUrls: ['./recuperar-senha.page.scss'],
 })
 export class RecuperarSenhaPage implements OnInit {
+
   email: string;
 
-  constructor(public afAuth: AngularFireAuth, //Autenticação
-private router : Router,
-private toastCtrl : ToastController) {}
+  constructor(public afAuth: AngularFireAuth,
+    private router: Router,
+    private toastCtrl: ToastController) { }
 
   ngOnInit() {
   }
 
-  recuperarSenha(){
-return this.afAuth.auth.sendPasswordResetEmail(this.email).then(()=>{
-
-
-
-
-var i = 0;
-while (i < 200 ){ 
-  this.afAuth.auth.sendPasswordResetEmail(this.email)
-    i += 1;
-    console.log("x");
-};
-
-this.presentToast("Enviando redefinição de senha para seu e-mail");
-this.router.navigate(["/login"]);
+recuperarSenha(){
+  return this.afAuth.auth.sendPasswordResetEmail(this.email).then(()=>{
+    this.presentToast("Enviado redefinição de senha para seu email");
+    this.router.navigate(['/login']);
   }).catch(()=>{
-    this.presentToast("Email inválido")
+    this.presentToast("Email Inválido!")
   });
 }
 
-async presentToast(msg : string) {
+
+
+async presentToast(msg: string){
   const toast = await this.toastCtrl.create({
-    message: msg,
+    message:msg,
     duration: 2000
   });
   toast.present();
 }
+
+logar(){ this.router.navigate(['/login']);}
+
 }
 
