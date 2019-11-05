@@ -20,6 +20,7 @@ const routes: Routes = [
   { path: 'logoff', loadChildren: './logoff/logoff.module#LogoffPageModule',  },  { path: 'contato', loadChildren: './contato/contato.module#ContatoPageModule' },
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 const routes: Routes = [
   {
     path: '',
@@ -58,6 +59,8 @@ const routes: Routes = [
 })
 export class AppRoutingModule {}
 =======
+=======
+>>>>>>> parent of c5ec83b... Merge pull request #2 from VK4PPS/Merge
 
 
 
@@ -70,4 +73,7 @@ export class AppRoutingModule {}
   exports: [RouterModule]
 })
 export class AppRoutingModule {}
+<<<<<<< HEAD
+>>>>>>> parent of c5ec83b... Merge pull request #2 from VK4PPS/Merge
+=======
 >>>>>>> parent of c5ec83b... Merge pull request #2 from VK4PPS/Merge
