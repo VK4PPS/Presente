@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireStorage } from '@angular/fire/storage';
-import { LoadingController } from '@ionic/angular';
+import { LoadingController, MenuController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { Perfil } from 'src/model/perfil';
 
@@ -23,15 +23,18 @@ export class PerfilPage implements OnInit {
   constructor(private formBuild : FormBuilder,
     private auth : AngularFireAuth,
     private db : AngularFirestore,
+    private menuCtrl : MenuController,
     public firestorage : AngularFireStorage,
     private loadingController : LoadingController,
     private router : Router) {
+
+      
 
       this.formGroup = this.formBuild.group({
         nome: ['',Validators.required],
         sobrenome: ['',Validators.required],
         telefone: ['',Validators.required],
-        email: ['',Validators.required]
+        email: localStorage.getItem('email')
       });
 
       this.auth.user.subscribe(resp =>{
@@ -47,6 +50,7 @@ export class PerfilPage implements OnInit {
   loadPerfil(){
     this.db.collection("perfil").doc(this.idUser).get().subscribe(response =>{
       if(response.exists==false){
+        this.menuCtrl.swipeEnable(false);
         this.nPerfil();
       }else{
         this.perfil.setPerfil(response.data());

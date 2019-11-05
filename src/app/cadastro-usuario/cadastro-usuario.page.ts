@@ -26,6 +26,7 @@ export class CadastroUsuarioPage implements OnInit {
   cadastrar(){
     this.afAuth.auth.createUserWithEmailAndPassword(this.email,this.senha).then(()=>{
       localStorage.setItem("uid",this.afAuth.auth.currentUser.uid);
+      localStorage.setItem("email",this.afAuth.auth.currentUser.email);
       this.menuCtrl.swipeEnable(true)
       this.router.navigate(['/perfil']);
     this.presentToast('Preencha Seus Dados!');

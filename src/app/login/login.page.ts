@@ -3,6 +3,8 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { MenuController, ToastController } from '@ionic/angular';
 
+
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
@@ -25,7 +27,8 @@ export class LoginPage implements OnInit {
   login(){
     this.afAuth.auth.signInWithEmailAndPassword( // Função para realizar login com
       this.email,this.senha).then(()=>{         // e-mail e senha
-       localStorage.setItem("uid",this.afAuth.auth.currentUser.uid);
+        localStorage.setItem("uid",this.afAuth.auth.currentUser.uid);
+        localStorage.setItem("email",this.afAuth.auth.currentUser.email);
         this.menuCtrl.swipeEnable(true); // ativiar o menu
         this.router.navigate(['/grupos-cadastro']); // redirecionar para home
 
